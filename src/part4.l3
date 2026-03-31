@@ -1,15 +1,56 @@
+;; Signature: last-item(lst)
+;; Type: [List(T1) -> T1]
+;; Purpose: Returns the last element of the given list
+;; Pre-condition: lst != '()
+;; Tests:
+;; (last-item '(1 2 3 4 5)) => 5
+;; (last-item '(apple banana orange)) => 'orange
 (define last-item
-  (λ (lst)
-    'todo))
+  (lambda (lst)
+    (if (eq? (cdr lst) '())
+        (car lst)
+        (last-item (cdr lst)))))
 
+
+;; Signature: remove-last-item(lst)
+;; Type: [List(T1) -> List(T1)]
+;; Purpose: Returns a new list containing all elements of the given list except the last one
+;; Pre-condition: lst != '()
+;; Tests: 
+;; (remove-last-item '(1 2 3 4 5)) => '(1 2 3 4)
+;; (remove-last-item '(apple banana orange)) => '(apple banana)
 (define remove-last-item
-  (λ (lst)
-    'todo))
+  (lambda (lst)
+    (if (eq? (cdr lst) '())
+        '()
+        (cons (car lst)(remove-last-item (cdr lst))))))
 
+
+;; Signature: rotate-nth(lst, n)
+;; Type: [List(T1) * Number -> List(T1)]
+;; Purpose: Returns a new list with the elements of the given list rotated right n times
+;; Pre-condition: lst != '() and n >= 0
+;; Tests:
+;; (rotate-nth '(a b c d e) 1) => '(e a b c d)
+;; (rotate-nth '(a b c d e) 2) => '(d e a b c)
+;; (rotate-nth '(1 2 3 4) 0) => '(1 2 3 4)
 (define rotate-nth
-  (λ (lst n)
-   'todo))
+  (lambda (lst n)
+    (if (eq? n 0)
+        lst
+        (rotate-nth (cons (last-item lst) (remove-last-item lst)) (- n 1)))))
 
+;; Signature: deep-reverse(l)
+;; Type: [List(T1) -> List(T1)]
+;; Purpose: Returns a new list with its elements in reverse order. If any elements are nested lists, they are also reversed.
+;; Pre-condition: l is a List
+;; Tests:
+;; (deep-reverse '((1 2) 3)) => '(3 (2 1))
+;; (deep-reverse '((1 2) 3 (4 (5 6)))) => '(((6 5) 4) 3 (2 1))
 (define deep-reverse
-  (λ (l)
-    'todo))
+  (lambda (l)
+    (if (eq? l '())
+        '()
+        (if (pair? (car l))
+            (append (deep-reverse (cdr l)) (cons (deep-reverse(car l)) '()))
+            (append (deep-reverse (cdr l)) (cons (car l) '()))))))
