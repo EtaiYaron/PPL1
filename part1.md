@@ -23,20 +23,22 @@ OOP improves over the imperative paradigm by introducing modularity. Instead of 
 The functional paradigm improves over OOP by removing side effects and the complexity of "state." In OOP, objects often change their internal data (state), which can lead to bugs that are hard to track. Functional programming treats everything as immutable expressions, making the code more predictable and easier to test since the same input will always give the exact same output.
 
 ### [10 points] Question 1.2
+```ts
 import { product } from "ramda"
 
 type Product = {
     name: string;
     price: number;
     discounted: boolean;
-}
+};
 
-const getDiscountedProductAveragePrice = (inventory: Product[]): number => {
+const getDiscountedProductAveragePriceFP = (inventory: Product[]): number => {
     let discountedItems = inventory.filter(product => product.discounted);
     let sum = discountedItems.reduce((acc, val) => acc + val.price, 0);
     let size = discountedItems.length
     return sum / size;
-}
+};
+```
 
 
 ### [18 points] Question 1.3
