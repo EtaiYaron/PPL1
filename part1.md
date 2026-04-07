@@ -33,9 +33,9 @@ type Product = {
 };
 
 const getDiscountedProductAveragePriceFP = (inventory: Product[]): number => {
-    let discountedItems = inventory.filter(product => product.discounted);
-    let sum = discountedItems.reduce((acc, val) => acc + val.price, 0);
-    let size = discountedItems.length
+    const discountedItems = inventory.filter(product => product.discounted);
+    const sum = discountedItems.reduce((acc, val) => acc + val.price, 0);
+    const size = discountedItems.length
     return sum / size;
 };
 ```
