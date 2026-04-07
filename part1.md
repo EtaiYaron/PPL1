@@ -24,8 +24,6 @@ The functional paradigm improves over OOP by removing side effects and the compl
 
 ### [10 points] Question 1.2
 ```ts
-import { product } from "ramda"
-
 type Product = {
     name: string;
     price: number;
@@ -36,16 +34,16 @@ const getDiscountedProductAveragePriceFP = (inventory: Product[]): number => {
     const discountedItems = inventory.filter(product => product.discounted);
     const sum = discountedItems.reduce((acc, val) => acc + val.price, 0);
     const size = discountedItems.length
-    return sum / size;
+    return size === 0 ? 0 : sum / size;
 };
 ```
 
 
 ### [18 points] Question 1.3
 
-(x, y) => x.some(y) answer: (x: T[], y: (val: T) => boolean) => boolean
-x => x.map(y => y * 2) answer: (x: number[]) => number[]
-(x, y) => x.filter(y) answer: (x: T[], y: (val: T) => boolean) =>  T[]
-x => x.reduce((acc, cur) => acc + cur, 0) answer: (x: number[]) => number
-(x, y) => x ? y[0] : y[1] answer: (x: boolean, y: T[]) => T
-(f,g) => x => f(g(x+1)) answer: (f: (arg: T) => S, g: (arg: number) => T) => (x: number) => S
+1. `(x, y) => x.some(y)` Answer: `<T>(x: T[], y: (val: T) => boolean) => boolean`
+2. `x => x.map(y => y * 2)` Answer: `(x: number[]) => number[]`
+3. `(x, y) => x.filter(y)` Answer: `<T>(x: T[], y: (val: T) => boolean) =>  T[]`
+4. `x => x.reduce((acc, cur) => acc + cur, 0)` Answer: `(x: number[]) => number`
+5. `(x, y) => x ? y[0] : y[1]` Answer: `<T>(x: boolean, y: T[]) => T`
+6. `(f,g) => x => f(g(x+1))` Answer: `<T, S>(f: (arg: T) => S, g: (arg: number) => T) => (x: number) => S`
